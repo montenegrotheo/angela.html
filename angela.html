@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>To Angela</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(to bottom, #1a1a2e, #16213e);
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container, .password-container {
+      max-width: 700px;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      animation: fadeIn 3s ease-in-out;
+      display: none;
+    }
+
+    .password-container.active, .container.active {
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #fbd46d;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.8em;
+      margin-bottom: 15px;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-style: italic;
+      color: #ccc;
+    }
+
+    input[type="password"] {
+      padding: 12px 20px;
+      font-size: 1.1em;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-bottom: 20px;
+      width: 60%;
+      max-width: 300px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    button {
+      background-color: #fbd46d;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      font-family: 'Playfair Display', serif;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #1a1a2e;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e6c24c;
+    }
+
+    .error {
+      color: #ff6b6b;
+      margin-bottom: 10px;
+      font-weight: bold;
+      height: 20px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Screen -->
+  <div class="password-container active" id="passwordScreen">
+    <h1>Enter Password</h1>
+    <input type="password" id="passwordInput" placeholder="Enter the password" autofocus />
+    <div class="error" id="errorMsg"></div>
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+
+  <!-- Poem Container -->
+  <div class="container" id="poemContainer">
+    <h1>To Angela</h1>
+    <p><em>3:18</em></p>
+    <p>Eto nanaman at iniisip ka.<br />
+      Iniisip paano kung sabihin ko na?</p>
+    <p>Iniisip kung paano sasabihin sayo ng harapan<br />
+      Na ikaw ang nais paglingkuran.</p>
+    <p>Mga masasayang alaala ay naiisip<br />
+      At nadadala hanggang sa panaginip.</p>
+
+    <p class="signature">— From Someone Who Cares Deeply</p>
+  </div>
+
+  <!-- Background Music -->
+  <iframe width="0" height="0" src="https://www.youtube.com/embed/LS--x31g_Po?autoplay=1&loop=1&playlist=LS--x31g_Po" 
+    frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+  <script>
+    function checkPassword() {
+      const passwordInput = document.getElementById('passwordInput');
+      const errorMsg = document.getElementById('errorMsg');
+      const poemContainer = document.getElementById('poemContainer');
+      const passwordScreen = document.getElementById('passwordScreen');
+
+      // The password is exactly "3:18"
+      if (passwordInput.value === '3:18') {
+        // Hide password screen and show poem
+        passwordScreen.classList.remove('active');
+        poemContainer.classList.add('active');
+      } else {
+        errorMsg.textContent = 'Incorrect password. Try again.';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    }
+
+    // Allow pressing Enter to submit password
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+  </script>
+
+</body>
+</html>
